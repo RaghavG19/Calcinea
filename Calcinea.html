@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5; /* Light gray */
+    }
+
+    .calculator {
+        background-color: #2c3e50; /* Dark blue */
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: slideInDown 0.5s ease;
+    }
+
+    input[type="text"] {
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 20px;
+        background-color: #34495e; /* Darker blue */
+        color: #fff; /* White */
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        animation: slideInLeft 0.5s ease;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .buttons button {
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        background-color: #e67e22; /* Orange */
+        color: #fff; /* White */
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .buttons button:hover {
+        background-color: #d35400; /* Darker orange */
+    }
+
+    .buttons button:active {
+        transform: translateY(2px);
+    }
+
+    @keyframes slideInDown {
+        0% {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInLeft {
+        0% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <input type="text" readonly>
+    <div class="buttons">
+        <button>sin</button>
+        <button>cos</button>
+        <button>tan</button>
+        <button>←</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>/</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>*</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-</button>
+        <button>.</button>
+        <button>0</button>
+        <button>=</button>
+        <button>+</button>
+        <button>Ac</button>
+    </div>
+</div>
+
+<script>
+    let string = "";
+    let button = document.querySelectorAll('.buttons');
+    Array.from(button).forEach((buttons) => {
+        buttons.addEventListener('click', (e) => {
+            if (e.target.innerHTML == '=') {
+                string = eval(string);
+                document.querySelector('input').value = string;
+            } else if (e.target.innerHTML == 'Ac') {
+                string = "";
+                document.querySelector('input').value = string;
+            } else if (e.target.innerHTML == "←") {
+                string = string.slice(0, -1);
+                console.log(string);
+                document.querySelector('input').value = string;
+            } else if (e.target.innerHTML == "sin") {
+                var x = string;
+                x = x * Math.PI / 180;
+                string = Math.sin(x);
+                document.querySelector('input').value = string;
+            } else if (e.target.innerHTML == "cos") {
+                var x = string;
+                x = x * Math.PI / 180;
+                string = Math.cos(x);
+                document.querySelector('input').value = string;
+            } else if (e.target.innerHTML == "tan") {
+                var x = string;
+                x = x * Math.PI / 180;
+                string = Math.tan(x);
+                document.querySelector('input').value = string;
+            } else {
+                console.log(e.target);
+                string = string + e.target.innerHTML;
+                document.querySelector('input').value = string;
+            }
+        })
+    });
+</script>
+</body>
+</html>
